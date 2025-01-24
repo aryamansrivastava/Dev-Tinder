@@ -60,7 +60,6 @@ app.delete("/user", async(req,res) => {
     const userId = req.body.userId;
     try {
         const user = await User.findByIdAndDelete(userId);
-
         res.send("User Deleted Successfully");
     }
     catch(err) {
@@ -73,7 +72,10 @@ app.patch("/user", async(req, res) => {
     const userId = req.body.userId;
     const data = req.body; 
     try{
-        await User.findByIdAndUpdate(userId, data);
+        const user = await User.findByIdAndUpdate(userId, data, {
+            returnDocument: "after",
+            runValidators: true,
+        });
         res.send("User Updated Successfully");
     }
     catch(err) {
