@@ -65,7 +65,7 @@ userRouter.get("/feed", userAuth, async(req, res) => {
 
         const page = parseInt(req.query.page) || 1;
         let  limit = parseInt(req.query.limit) || 10;
-        limit = limit>50 ? 50 : limit;
+        limit = limit > 50 ? 50 : limit;
         const skip = (page-1)*limit;
 
         // find all the connection request (sent + received)
@@ -88,7 +88,7 @@ userRouter.get("/feed", userAuth, async(req, res) => {
             ],
         }).select(USER_SAFE_DATA).skip(skip).limit(limit);
 
-        res.send(users);
+        res.send({data:users});
     }
     catch(err) {
         res.status(400).json({message: err.message});
