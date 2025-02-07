@@ -1,4 +1,8 @@
 
+// defines a Mongoose schema for connection requests between users, 
+// ensuring valid statuses and preventing self-requests. 
+// It also indexes requests for faster lookups and enforces constraints before saving.
+
 const mongoose = require('mongoose');
 
 const connectionRequestSchema = new mongoose.Schema(

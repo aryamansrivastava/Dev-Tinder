@@ -1,3 +1,10 @@
+// cookie parser is middleware to Extracts cookies 
+// from requests and makes them available in req.cookies
+
+// Cors Allows the frontend (React/Vue) to communicate 
+// with the backend (Express) across different origins
+
+// ex -> This allows frontend (http://localhost:5173) to call APIs hosted on http://localhost:3000.
 const express = require("express");
 const connectDB = require("./config/database");
 const app = express();
@@ -9,8 +16,8 @@ app.use(cors({
     credentials: true,
 })
 );
-app.use(express.json());
-app.use(cookieParser());
+app.use(express.json());  // Parse incoming JSON data
+app.use(cookieParser());  // Enable cookie handling
 
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
@@ -22,6 +29,8 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 
+// first connects app to mongoDB and 
+// then starts to listen on the server 
 connectDB()
 .then(() => {
     console.log("DataBase Connection established...");

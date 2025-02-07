@@ -1,3 +1,6 @@
+// Defines a User schema with proper validation, 
+// password hashing, and JWT authentication methods.
+
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");

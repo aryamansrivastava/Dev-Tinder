@@ -4,6 +4,9 @@ const profileRouter = express.Router();
 const {userAuth} = require("../middlewares/auth");
 const {validateEditProfileData} = require("../utils/validation");
 
+// Uses userAuth middleware to ensure only logged-in users can access this route.
+// Retrieves the authenticated user's data from req.user.
+
 profileRouter.get("/profile/view", userAuth, async(req,res) => {
     try {
     const user = req.user;
@@ -21,8 +24,10 @@ profileRouter.put("/profile/edit", userAuth, async(req, res) => {
         }
         const loggedInUser = req.user;
 
+        // Updates the logged-in user’s profile dynamically based on the request body.
         Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
 
+        // saving the changes to db
         await loggedInUser.save();
 
         res.json({
