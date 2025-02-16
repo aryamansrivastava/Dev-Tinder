@@ -6,9 +6,13 @@
 const mongoose = require("mongoose");
 
 const connectDB = async() => {
-    await mongoose.connect(
-        "mongodb+srv://srivastavaaryaman05:Aryamansri8931020149@namastenode.nbo2w.mongodb.net/devTinder"
-    );
+    try {
+        await mongoose.connect(
+        "mongodb+srv://srivastavaaryaman05:Aryamansri8931020149@namastenode.nbo2w.mongodb.net/devTinder");
+    }
+    catch (error) {
+        console.log("something went wrong while connecting with database", error.message);
+    }
 }; 
 
 module.exports = connectDB;
